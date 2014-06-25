@@ -1,0 +1,21 @@
+			Heuristic Implementation
+			
+
+The definition of the heuristic is 
+NumberP2Stones (Opponent) - NumberP1Stones (Human Player)
+
+This heuristic is useful with respect that given a reasonable depth,
+will ensure a move that will assuredly result in that player containing
+the least number of stones on the field per turn, that being the goal 
+of the game in the terminal state.
+
+This heuristic mostly applies the principle of mobility in its decision. 
+It's selection assures that the resulting state after his movement
+will result in the minimal number of his stones and greater movement of his opponent. 
+The player will essentially select a spot that is farthest away from the cluster of 
+opponent stones so as to reduce the number of "flipped" opponent stones as much as 
+possible to result in as few his stones as possible. This causes a "sparsing" of the 
+layout of stones. As a result, there are more possible moves for the next player, 
+including the possible moves of the original cluster and the possible moves of 
+the sparse lineup of the original player, thereby increasing the mobility of the 
+opponent, increasing the likeliness of flipping his opponent's stones. 

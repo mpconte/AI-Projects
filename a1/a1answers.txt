@@ -1,0 +1,230 @@
+%% ----------------------------------------------------------
+
+%% CSE 3402 Assignment 1
+
+%% Family name: Conte
+
+%% Given name: Matthew
+
+%% Student number: 207333230
+
+
+
+%%    Answers to Questions 6-10
+
+%% Instructions: 
+
+%% Please edit this file in the following way to answer the text
+%% questions of Assignment 1. 
+
+%% - Please replace any occurence of '[yes/no]' with either 'yes' or
+%% 'no' to answer the respective question.
+
+%% - Replace any occurence of '[explain N words]' or '[if yes (resp.
+%%   no), explain N words]' with an explanation containing no more
+%%   than N words if the condition (yes/no) applies to your previous
+%%   answer.
+
+%% - Do not remove any other lines, in particular do not remove the
+%%   task-tags (<tasknumber>)
+
+%% - Any line starting with a '%' will be ignored.
+
+%% - Submit this file electronically.
+
+%% ----------------------------------------------------------
+
+
+
+%% 6. Which of the four heuristics are admissible?
+
+%%  - hfn_null
+<6.1>
+yes
+
+%%  - hfn_misplaced
+<6.2>
+yes
+
+%%  - hfn_manhattan
+<6.3>
+yes
+
+%%  - hfn_inversions
+<6.4>
+no
+
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 7. Suppose for sliding a tile to the left we would change the
+% cost from 1 to 0.5 and leave all the other moves the same cost.
+% Does this affect the admissibility of the heuristics? Which of
+% them are admissible now?
+
+
+%%  - hfn_null
+<7.1.1>
+yes
+
+<7.1.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_misplaced
+<7.2.1>
+no
+
+<7.2.2>
+Consider a state n of a (N = 8) puzzle where the first two rows are in correct order, but the
+last two numbers (7,8) in the last row are together on the bottom righ corner with the blank 
+in the bottom left.
+
+In this case, hfn_misplaced(n) = 2. 
+
+The optimal solution is to move 7 left then 8 left which will cost 0.5 + 0.5 = 1.
+Since the heuristic overestimated the cost to the optimal solution, it's not admissible.
+
+
+%%  - hfn_manhattan
+<7.3.1>
+no
+
+<7.3.2>
+Consider a state n of a (N = 8) puzzle where the first two rows are in correct order, but the
+last two numbers (7,8) in the last row are together on the bottom righ corner with the blank 
+in the bottom left.
+
+In this case, hfn_manhattan(n) = 2. 
+
+The optimal solution is to move 7 left then 8 left which will cost 0.5 + 0.5 = 1.
+Since the heuristic overestimated the cost to the optimal solution, it's not admissible.
+
+
+
+%%  - hfn_inversions
+<7.4.1>
+no
+
+<7.4.2>
+Consider the following state n of a (N = 8) puzzle:
+
+		____________
+		|   |   |   |
+		|_1_|_2_|_3_|
+		|   |	|   |
+		|_4_|_8_|_5_|
+		|   |	|   |
+		|_7_|___|_6_|
+		
+The optimal solution is 8 down , 5 left, 6 up, giving a total cost of 1 + 0.5 + 1 = 2.5 
+(since each misplaced tile moved exactly once which is the minimum number of steps required to solve)
+
+Note that hfn_inversions(n) = 4
+
+Since the heuristic overestimated the cost of the goal from a state n, it's not admissible.
+
+%% /* ------------------------------------------------------ */
+
+% 8. Now suppose we would change the cost for sliding a tile to the
+% left to 2 and leave all the other moves the same cost. Does this
+% now affect the admissibility of the four heuristics? Again, which
+% of them are admissible?
+
+%%  - hfn_null
+<8.1.1>
+yes
+
+<8.1.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_misplaced
+<8.2.1>
+yes
+
+<8.2.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_manhattan
+<8.3.1>
+yes
+
+<8.3.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_inversions
+<8.4.1>
+yes
+
+<8.4.2>
+[if no explain in 100 words or less]
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 9. In the former modification (sliding to the LEFT costs 0.5), can
+% you say for sure which heuristic will be the fastest (expand the
+% least number of states) in finding a (not necessary optimal)
+% solution? Explain.
+<9.1>
+yes
+
+<9.2>
+We know that for any node n, hfn_manhattan(n) is greater than or equal to hfn_misplaced(n), making it 
+more dominate than hfn_misplaced. 
+In the case of uniform cost of movement, hfn_manhattan and hsn_inversion have no real dominance relation.
+But in the case of sliding to the left of cost 0.5, and that when a tile slides
+to the left, hfn_inversion does not change, 
+but hfn_manhattan will change and be smaller since the cost at each step will be minimum with added heuristic,
+therefore, hfn_inversions dominates hfN_manhattan, so it expands less.
+
+
+%% /* ------------------------------------------------------ */
+
+% 10. One can obtain another heuristic for the N-puzzle by relaxing the
+% problem as follows: let's say that a tile can move from square A to
+% square B if B is blank.  The exact solution to this problem defines
+% Gaschnig's heuristic. Explain why Gaschnig's heuristic is at
+% least as accurate as hfn_misplaced.  Show some cases where it
+% is more accurate than both the hfn_misplaced} and 
+% hfn_manhattan} heuristics.  Can you suggest a way to calculate
+% Gaschnig's heuristic efficiently?
+
+<10.1>
+hfn_misplaced is the optimal solution for the problem where a tile can move from square A to square B. 
+This is a relaxation of the original problem (a tile can move from A to B if B is blank), 
+and Gaschnig's heuristic is the optimal solution for this original problem, Gaschnig's heuristic is at least 
+as expensive as hfn_misplaced. Since Gaschnig's heuristic is also admissible because hfn_misplaced is to, 
+Gaschnig's heuristic is therefore at least as accurate as hfn_misplaced.
+
+
+<10.2>
+If we switched two adjacent tiles from the goal state, we have a state where 
+
+hfn_misplaced = hfn_manhattan = 2  (obviously),
+
+but Gaschnig's heuristic = 3,
+	this involves:
+	(1)move one misplaced tile to blank 
+	(2)move other tile to correct spot
+	(3)move first tile to correct spot
+
+		
+<10.3>
+To compute Gaschnig's heuristic, 
+do the following until the goal state is reached: 
+
+let B be the current location of the blank; 
+
+if B is occupied by tile X (not blank) in the goal state, move X to B; 
+
+else, move any misplaced tile to B. 
+
+
+This is the optimal solution to the relaxed problem.
